@@ -8,9 +8,11 @@ import IconButton from "./IconButton";
 import Currency from "./Currency";
 import { useRouter } from "next/navigation";
 import usePreviewModal from "@/hooks/usePreviewModal";
+import useCart from "@/hooks/useCart";
 
 const ProductCard = ({ data }: { data: Product }) => {
   const previewModal = usePreviewModal();
+  const cart = useCart();
   const router = useRouter();
   const handleClick = () => {
     router.push(`/product/${data?.id}`);
@@ -19,6 +21,11 @@ const ProductCard = ({ data }: { data: Product }) => {
     event.stopPropagation();
 
     previewModal.onOpen(data);
+  };
+  const onAddToCart: MouseEventHandler<HTMLButtonElement> = (event) => {
+    event.stopPropagation();
+
+    cart.addItem(data);
   };
   return (
     <div
@@ -39,7 +46,7 @@ const ProductCard = ({ data }: { data: Product }) => {
               icon={<Expand size={20} className="text-gray-600" />}
             />
             <IconButton
-              onClick={() => {}}
+              onClick={onAddToCart}
               icon={<ShoppingCart size={20} className="text-gray-600" />}
             />
           </div>
