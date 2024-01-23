@@ -1,8 +1,9 @@
 import Link from "next/link";
 import React from "react";
 import MainNav from "./MainNav";
-import getCategories from "./actions/getCategories";
+
 import NavbarActions from "./NavbarActions";
+import getCategories from "./actions/getCategories";
 export const revalidate = 0;
 const Navbar = async () => {
   const categories = await getCategories();
